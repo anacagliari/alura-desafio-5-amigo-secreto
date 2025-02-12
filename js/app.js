@@ -1,5 +1,5 @@
 let listaAmigoSecreto = [];
-
+// testando mob programming
 function adicionar() {
     let amigoSecreto = document.getElementById('nome-amigo');
     if (amigoSecreto.value == '') {
