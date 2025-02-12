@@ -1,96 +1,112 @@
 let listaAmigoSecreto = [];
 // testando mob programming
+// novo teste
 function adicionar() {
-    let amigoSecreto = document.getElementById('nome-amigo');
-    if (amigoSecreto.value == '') {
-        alert('Informe um nome.');
-        return; //daqui para baixo, ele não executa nada.
-    }
+  let amigoSecreto = document.getElementById("nome-amigo");
+  if (amigoSecreto.value == "") {
+    alert("Informe um nome.");
+    return; //daqui para baixo, ele não executa nada.
+  }
 
-    if (listaAmigoSecreto.includes(amigoSecreto.value)) {
-        alert('Nome do amigo existente.');
-        return; //daqui para baixo, ele não executa nada.
-    }
+  if (listaAmigoSecreto.includes(amigoSecreto.value)) {
+    alert("Nome do amigo existente.");
+    return; //daqui para baixo, ele não executa nada.
+  }
+  //novo teste
+  // novo teste 2
+  let listaVisualAmigoSecreto = document.getElementById("lista-amigos");
 
-    let listaVisualAmigoSecreto = document.getElementById('lista-amigos');
+  listaAmigoSecreto.push(amigoSecreto.value.lowercase);
 
-    listaAmigoSecreto.push((amigoSecreto.value).lowercase);
+  if (listaVisualAmigoSecreto.textContent == "") {
+    listaVisualAmigoSecreto.textContent = amigoSecreto.value;
+  } else {
+    listaVisualAmigoSecreto.textContent =
+      listaVisualAmigoSecreto.textContent + ", " + amigoSecreto.value;
+  }
+  //teste sylvia
 
-    if (listaVisualAmigoSecreto.textContent == '') {
-        listaVisualAmigoSecreto.textContent = amigoSecreto.value;
-    } else {
-        listaVisualAmigoSecreto.textContent = listaVisualAmigoSecreto.textContent + ', ' + amigoSecreto.value;
-    }
+  // testando lucas
 
-    amigoSecreto.value = '';
+  amigoSecreto.value = "";
 
-    atualizarLista();
-    atualizarSorteio();
+  atualizarLista();
+  atualizarSorteio();
 }
 
 function sortear() {
-    if (listaAmigoSecreto.length < 4) {
-        alert('Para sortear é preciso ter ao menos 4 pessoas.');
-        return;
-    }
+  if (listaAmigoSecreto.length < 4) {
+    alert("Para sortear é preciso ter ao menos 4 pessoas.");
+    return;
+  }
 
-    embaralhar(listaAmigoSecreto);
-    let sorteio = document.getElementById('lista-sorteio');
+  embaralhar(listaAmigoSecreto);
+  let sorteio = document.getElementById("lista-sorteio");
 
-    for (let i = 0; i < listaAmigoSecreto.length; i++) {
-        if (i == listaAmigoSecreto.length - 1) {
-            sorteio.innerHTML = sorteio.innerHTML + listaAmigoSecreto[i] + ' tirou ' + listaAmigoSecreto[0] + '<br/>';
-        } else {
-            sorteio.innerHTML = sorteio.innerHTML + listaAmigoSecreto[i] + ' tirou ' + listaAmigoSecreto[i + 1] + '<br/>';
-        }
+  for (let i = 0; i < listaAmigoSecreto.length; i++) {
+    if (i == listaAmigoSecreto.length - 1) {
+      sorteio.innerHTML =
+        sorteio.innerHTML +
+        listaAmigoSecreto[i] +
+        " tirou " +
+        listaAmigoSecreto[0] +
+        "<br/>";
+    } else {
+      sorteio.innerHTML =
+        sorteio.innerHTML +
+        listaAmigoSecreto[i] +
+        " tirou " +
+        listaAmigoSecreto[i + 1] +
+        "<br/>";
     }
+  }
 }
 
 //ao clicar em cima do nome no campo amigos incluídos, o nome é excluido e, se tiver sido sorteado, a lista feita dos sorteados é apagada.
 function excluirAmigo(index) {
-    listaAmigoSecreto.splice(index, 1);
-    atualizarLista();
-    atualizarSorteio();
+  listaAmigoSecreto.splice(index, 1);
+  atualizarLista();
+  atualizarSorteio();
 }
 
 //algoritmo de Fisher-Yates
 function embaralhar(lista) {
-    for (let i = lista.length; i; i--) {
-        const j = Math.floor(Math.random() * (i));
+  for (let i = lista.length; i; i--) {
+    const j = Math.floor(Math.random() * i);
 
-        // Troca de elementos
-        [lista[i - 1], lista[j]] = [lista[j], lista[i - 1]];
-    }
+    // Troca de elementos
+    [lista[i - 1], lista[j]] = [lista[j], lista[i - 1]];
+  }
 }
 
 function atualizarSorteio() {
-    let sorteio = document.getElementById('lista-sorteio');
-    sorteio.innerHTML = '';
+  let sorteio = document.getElementById("lista-sorteio");
+  sorteio.innerHTML = "";
 }
 
 function atualizarLista() {
-    let lista = document.getElementById('lista-amigos');
-    lista.innerHTML = '';
+  let lista = document.getElementById("lista-amigos");
+  lista.innerHTML = "";
 
-    for (let i = 0; i < listaAmigoSecreto.length; i++) {
-        // Cria um elemento de parágrafo para cada amigo
-        let paragrafo = document.createElement('p');
-        paragrafo.textContent = listaAmigoSecreto[i];
+  for (let i = 0; i < listaAmigoSecreto.length; i++) {
+    // Cria um elemento de parágrafo para cada amigo
+    let paragrafo = document.createElement("p");
+    paragrafo.textContent = listaAmigoSecreto[i];
 
-        // Adiciona um evento de clique para excluir o amigo
-        paragrafo.addEventListener('click', function() {
-            excluirAmigo(i);
-        });
+    // Adiciona um evento de clique para excluir o amigo
+    paragrafo.addEventListener("click", function () {
+      excluirAmigo(i);
+    });
 
-        // Adiciona o parágrafo à lista
-        lista.appendChild(paragrafo);
-    }
-}//
+    // Adiciona o parágrafo à lista
+    lista.appendChild(paragrafo);
+  }
+} //
 
 function reiniciar() {
-    listaAmigoSecreto = [];
-    document.getElementById('lista-amigos').innerHTML = '';
-    document.getElementById('lista-sorteio').innerHTML = '';
+  listaAmigoSecreto = [];
+  document.getElementById("lista-amigos").innerHTML = "";
+  document.getElementById("lista-sorteio").innerHTML = "";
 }
 
 /* meus desafios pessoais:
